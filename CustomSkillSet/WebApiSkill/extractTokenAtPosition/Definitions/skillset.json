@@ -1,0 +1,124 @@
+{
+    "name": "vector-integrated-skillset",
+    "description": "Skillset to chunk documents and generate embeddings",
+    "skills": [
+        {
+            "@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill",
+            "name": "#1",
+            "description": null,
+            "context": "/document/pages/*",
+            "resourceUri": "https://xxxxx.openai.azure.com",
+            "apiKey": "<redacted>",
+            "deploymentId": "xxxxx-text-embedding",
+            "inputs": [
+                {
+                    "name": "text",
+                    "source": "/document/pages/*"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "embedding",
+                    "targetName": "vector"
+                }
+            ],
+            "authIdentity": null
+        },
+        {
+            "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+            "name": "#2",
+            "description": "Split skill to chunk documents",
+            "context": "/document",
+            "defaultLanguageCode": "en",
+            "textSplitMode": "pages",
+            "maximumPageLength": 2000,
+            "pageOverlapLength": 500,
+            "maximumPagesToTake": 0,
+            "inputs": [
+                {
+                    "name": "text",
+                    "source": "/document/content"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "textItems",
+                    "targetName": "pages"
+                }
+            ]
+        },
+        {
+            "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+            "name": "extractTokenAtPosition",
+            "description": null,
+            "context": "/document/content",
+            "uri": "https://xxxxx.azurewebsites.net/api/extractTokenAtPosition",
+            "httpMethod": "POST",
+            "timeout": "PT3M",
+            "batchSize": 10,
+            "degreeOfParallelism": 10,
+            "inputs": [
+                {
+                    "name": "text",
+                    "source": "/document/url"
+                },
+                {
+                    "name": "delimiter",
+                    "source": "='/'"
+                },
+                {
+                    "name": "position",
+                    "source": "='-2'"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": "folder",
+                    "targetName": "folder"
+                }
+            ],
+            "httpHeaders": {}
+        }
+    ],
+    "cognitiveServices": null,
+    "knowledgeStore": null,
+    "indexProjections": {
+        "selectors": [
+            {
+                "targetIndexName": "vector-integrated",
+                "parentKeyFieldName": "parent_id",
+                "sourceContext": "/document/pages/*",
+                "mappings": [
+                    {
+                        "name": "chunk",
+                        "source": "/document/pages/*",
+                        "sourceContext": null,
+                        "inputs": []
+                    },
+                    {
+                        "name": "vector",
+                        "source": "/document/pages/*/vector",
+                        "sourceContext": null,
+                        "inputs": []
+                    },
+                    {
+                        "name": "title",
+                        "source": "/document/metadata_storage_name",
+                        "sourceContext": null,
+                        "inputs": []
+                    },
+                    {
+                        "name": "folder",
+                        "source": "/document/folder",
+                        "sourceContext": null,
+                        "inputs": []
+                    }
+                ]
+            }
+        ],
+        "parameters": {
+            "projectionMode": "skipIndexingParentDocuments"
+        }
+    },
+    "encryptionKey": null
+}
