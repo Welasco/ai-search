@@ -57,4 +57,4 @@ To use this workaround just create an Azure Function App with the content under 
 
 The Function App Code is available here:
 
-[Function App extractTokenAtPosition](./function/function_app.py)
+- [Function App extractTokenAtPosition](./function/function_app.py)
