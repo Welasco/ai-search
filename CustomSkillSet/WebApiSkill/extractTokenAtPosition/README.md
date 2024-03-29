@@ -51,7 +51,7 @@ Skill Set Definition:
     ],
     "httpHeaders": {}
 }
-'''
+```
 
 To use this workaround just create an Azure Function App with the content under the folder function.
 
