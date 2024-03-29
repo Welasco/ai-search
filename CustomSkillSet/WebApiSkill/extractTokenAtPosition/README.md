@@ -5,15 +5,15 @@ There is a built-in mappingFunction called extractTokenAtPosition which is extre
 
 This is documented here:
 
-[Field mappings and transformations using Azure AI Search indexers](https://learn.microsoft.com/en-us/azure/search/search-indexer-field-mappings)
+- [Field mappings and transformations using Azure AI Search indexers](https://learn.microsoft.com/en-us/azure/search/search-indexer-field-mappings)
 
-[extractTokenAtPosition function](https://learn.microsoft.com/en-us/azure/search/search-indexer-field-mappings?tabs=rest#extractTokenAtPositionFunction)
+- [extractTokenAtPosition function](https://learn.microsoft.com/en-us/azure/search/search-indexer-field-mappings?tabs=rest#extractTokenAtPositionFunction)
 
 Unfortunately it's not possible to use a mappingFunction when you have a skillset that is utilizing indexProjections to output custom data.
 
 Documentation about indexProjections can be found here:
 
-[Index projections in Azure AI Search](https://learn.microsoft.com/en-us/azure/search/index-projections-concept-intro)
+- [Index projections in Azure AI Search](https://learn.microsoft.com/en-us/azure/search/index-projections-concept-intro)
 
 For workaround this limitation I created a Function App that receives the same Input as extractTokenAtPosition mappingFunction to give the same expected expirience.
 
