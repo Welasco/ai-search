@@ -19,7 +19,7 @@ For workaround this limitation I created a Function App that receives the same I
 
 To know more about Custom WebApiSkill the documentation is available here:
 
-[Custom Web API skill in an Azure AI Search enrichment pipeline](https://learn.microsoft.com/en-us/azure/search/cognitive-search-custom-skill-web-api)
+- [Custom Web API skill in an Azure AI Search enrichment pipeline](https://learn.microsoft.com/en-us/azure/search/cognitive-search-custom-skill-web-api)
 
 Skill Set Definition:
 ```json
