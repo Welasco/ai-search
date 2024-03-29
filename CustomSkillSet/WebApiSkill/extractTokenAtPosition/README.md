@@ -15,7 +15,11 @@ Documentation about indexProjections can be found here:
 
 - [Index projections in Azure AI Search](https://learn.microsoft.com/en-us/azure/search/index-projections-concept-intro)
 
-For workaround this limitation I created a Function App that receives the same Input as extractTokenAtPosition mappingFunction to give the same expected expirience.
+For workaround this limitation I created a Function App that receives the same Input as extractTokenAtPosition mappingFunction using a Custom skill in a SkillSet. The idea is to have the same expected experience using a Custom WebApiSkill.
+
+To know more about Custom WebApiSkill the documentation is available here:
+
+[Custom Web API skill in an Azure AI Search enrichment pipeline](https://learn.microsoft.com/en-us/azure/search/cognitive-search-custom-skill-web-api)
 
 Skill Set Definition:
 ```json
